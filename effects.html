@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>導入効果 - AI活用教育プログラム</title>
+    <meta name="description" content="AI活用教育プログラム導入による効果データをご紹介。工賃向上、業務効率化、新規受注など、数値で見る具体的な成果。">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #f39c12;
+            --text-color: #333333;
+            --bg-color: #f5f5f5;
+            --white: #ffffff;
+            --light-gray: #e0e0e0;
+            --dark-gray: #555555;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* ヘッダー */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 30px;
+            position: relative;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            display: block;
+            padding: 5px 0;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-menu .dropdown {
+            position: relative;
+        }
+        
+        .nav-menu .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--white);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .nav-menu .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .nav-menu .dropdown-content a {
+            padding: 12px 16px;
+            display: block;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .nav-menu .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        
+        .nav-menu .dropdown-content a:hover {
+            background-color: var(--bg-color);
+        }
+        
+        .cta-button {
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #e67e22;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 24px;
+        }
+        
+        /* ページヘッダー */
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://source.unsplash.com/random/1600x400/?data,growth');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 70px;
+            position: relative;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.8), rgba(46, 204, 113, 0.4));
+            z-index: 1;
+        }
+        
+        .page-header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .page-header h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            font-family: 'Noto Serif JP', serif;
+        }
+        
+        .page-header p {
+            font-size: 18px;
+            margin-bottom: 0;
+        }
+        
+        /* パンくずリスト */
+        .breadcrumb {
+            background-color: var(--white);
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .breadcrumb-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .breadcrumb-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .breadcrumb-item:not(:last-child)::after {
+            content: '\f105';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            margin: 0 10px;
+            color: var(--dark-gray);
+        }
+        
+        .breadcrumb-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item.active {
+            color: var(--dark-gray);
+        }
+        
+        /* セクション共通 */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-family: 'Noto Serif JP', serif;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title p {
+            font-size: 18px;
+            color: var(--dark-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* サマリーセクション */
+        .summary-section {
+            background-color: var(--white);
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .stat-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .stat-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 20px;
+        }
+        
+        .stat-value {
+            font-size: 42px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            line-height: 1.2;
+        }
+        
+        .stat-label {
+            font-size: 16px;
+            color: var(--dark-gray);
+            margin-bottom: 0;
+        }
+        
+        .chart-container {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .chart-header h3 {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin: 0;
+        }
+        
+        .chart-note {
+            font-size: 14px;
+            color: var(--dark-gray);
+            font-style: italic;
+            margin-top: 15px;
+            text-align: right;
+        }
+        
+        /* ユースケースセクション */
+        .usecase-section {
+            background-color: #f0f8ff;
+        }
+        
+        .usecase-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .usecase-card {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .usecase-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .usecase-header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px;
+            position: relative;
+        }
+        
+        .usecase-header.green {
+            background-color: var(--secondary-color);
+        }
+        
+        .usecase-header h3 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+        
+        .usecase-header p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin: 0;
+        }
+        
+        .usecase-content {
+            padding: 25px;
+        }
+        
+        .usecase-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .usecase-item i {
+            color: var(--secondary-color);
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        .usecase-results {
+            background-color: #f7f7f7;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        .usecase-results h4 {
+            font-size: 18px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed var(--light-gray);
+        }
+        
+        .result-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .result-label {
+            color: var(--dark-gray);
+        }
+        
+        .result-value {
+            font-weight: bold;
+            color: var(--text-color);
+        }
+        
+        /* 比較セクション */
+        .comparison-section {
+            background-color: var(--white);
+        }
+        
+        .comparison-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .comparison-item {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .comparison-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+        }
+        
+        .before-item::before {
+            background-color: var(--dark-gray);
+        }
+        
+        .after-item::before {
+            background-color: var(--secondary-color);
+        }
+        
+        .comparison-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .comparison-header i {
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        
+        .before-item .comparison-header i {
+            color: var(--dark-gray);
+        }
+        
+        .after-item .comparison-header i {
+            color: var(--secondary-color);
+        }
+        
+        .comparison-header h3 {
+            font-size: 22px;
+        }
+        
+        .comparison-list {
+            list-style: none;
+        }
+        
+        .comparison-list li {
+            padding: 10px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .comparison-list li i {
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        .before-item .comparison-list li i {
+            color: #e74c3c;
+        }
+        
+        .after-item .comparison-list li i {
+            color: var(--secondary-color);
+        }
+        
+        /* ROIセクション */
+        .roi-section {
+            background-color: #f0f8ff;
+        }
+        
+        .roi-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .roi-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .roi-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .roi-header h3 {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .roi-chart {
+            height: 300px;
+            margin-bottom: 20px;
+        }
+        
+        .roi-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+        }
+        
+        .roi-detail-item {
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            padding: 15px;
+            background-color: #f7fbff;
+            border-radius: 5px;
+        }
+        
+        .roi-detail-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .roi-detail-label {
+            font-size: 14px;
+            color: var(--dark-gray);
+        }
+        
+        .supplemental-info {
+            font-size: 14px;
+            color: var(--dark-gray);
+            background-color: #f7fdff;
+            padding: 15px;
+            border-left: 3px solid var(--primary-color);
+            margin-top: 20px;
+        }
+        
+        /* CTA セクション */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color), #2980b9);
+            color: var(--white);
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            top: -150px;
+            left: -150px;
+        }
+        
+        .cta-section::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            bottom: -100px;
+            right: -100px;
+        }
+        
+        .cta-container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-family: 'Noto Serif JP', serif;
+        }
+        
+        .cta-description {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .cta-primary {
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-primary:hover {
+            background-color: #e67e22;
+            transform: translateY(-3px);
+        }
+        
+        .cta-secondary {
+            background-color: transparent;
+            color: var(--white);
+            padding: 14px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            border: 2px solid var(--white);
+            transition: all 0.3s ease;
+        }
+        
+        .cta-secondary:hover {
+            background-color: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+        
+        /* フッター */
+        footer {
+            background-color: #333;
+            color: var(--white);
+            padding: 80px 0 30px;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 50px;
+            background-color: var(--white);
+            top: 0;
+            left: 0;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 0);
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--white);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-logo img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        
+        .footer-links h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: block;
+            padding: 5px 0;
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+        
+        .footer-contact p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+        
+        .footer-social {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #444;
+            border-radius: 50%;
+            margin-right: 10px;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 50px;
+            border-top: 1px solid #444;
+        }
+        
+        /* アニメーション効果 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* タブ */
+        .tab-container {
+            margin-bottom: 40px;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .tab-button {
+            padding: 12px 25px;
+            background-color: var(--light-gray);
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* レスポンシブデザイン */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-menu li {
+                margin: 10px 0;
+            }
+            
+            .nav-menu .dropdown-content {
+                position: static;
+                box-shadow: none;
+                display: none;
+                padding-left: 20px;
+            }
+            
+            .nav-menu .dropdown.active .dropdown-content {
+                display: block;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .page-header h1 {
+                font-size: 32px;
+            }
+            
+            .page-header p {
+                font-size: 16px;
+            }
+            
+            .tab-buttons {
+                flex-direction: column;
+            }
+            
+            .comparison-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="https://via.placeholder.com/40x40" alt="ロゴ">
+                AI教育プログラム
+            </a>
+            <button class="hamburger" aria-label="メニュー">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu">
+                <li class="dropdown">
+                    <a href="programs.html">プログラム紹介 <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="program-a.html">プログラムA（業務効率化）</a>
+                        <a href="program-b.html">プログラムB（AIスキル習得）</a>
+                        <a href="curriculum.html">カリキュラム詳細</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="effects.html">導入効果 <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="effects-business.html">事業所向け効果</a>
+                        <a href="effects-worker.html">就労者向け効果</a>
+                        <a href="roi-calculator.html">投資回収シミュレーション</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="case-studies.html">導入事例 <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="case-type-a.html">A型事業所事例</a>
+                        <a href="case-type-b.html">B型事業所事例</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="pricing.html">料金・導入方法 <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="pricing-plans.html">料金プラン</a>
+                        <a href="implementation.html">導入ステップ</a>
+                        <a href="faq.html">よくある質問</a>
+                    </div>
+                </li>
+                <li><a href="contact.html" class="cta-button">お問い合わせ</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ページヘッダー -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <h1>導入効果</h1>
+            <p>AI活用教育プログラム導入による効果と成果</p>
+        </div>
+    </div>
+
+    <!-- パンくずリスト -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item"><a href="index.html">ホーム</a></li>
+                <li class="breadcrumb-item active">導入効果</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 効果サマリーセクション -->
+    <section class="summary-section">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>AI活用の効果</h2>
+                <p>事業所と就労者双方にもたらされる具体的な数値効果</p>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat-card fade-in">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-value">+37%</div>
+                    <div class="stat-label">平均工賃向上率</div>
+                </div>
+                
+                <div class="stat-card fade-in">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-value">-62%</div>
+                    <div class="stat-label">事務作業時間削減率</div>
+                </div>
+                
+                <div class="stat-card fade-in">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-value">89%</div>
+                    <div class="stat-label">利用者継続率</div>
+                </div>
+                
+                <div class="stat-card fade-in">
+                    <div class="stat-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="stat-value">+25%</div>
+                    <div class="stat-label">新規受注獲得率</div>
+                </div>
+            </div>
+            
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="tab-wage">工賃・収益向上</button>
+                    <button class="tab-button" data-tab="tab-efficiency">業務効率化</button>
+                    <button class="tab-button" data-tab="tab-satisfaction">満足度向上</button>
+                </div>
+                
+                <div class="tab-content active" id="tab-wage">
+                    <div class="chart-container fade-in">
+                        <div class="chart-header">
+                            <h3>導入後の平均工賃推移（3事業所平均）</h3>
+                        </div>
+                        <canvas id="wageChart" width="400" height="200"></canvas>
+                        <div class="chart-note">※ B型事業所における導入効果（2023年度データ）</div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="tab-efficiency">
+                    <div class="chart-container fade-in">
+                        <div class="chart-header">
+                            <h3>業務効率化と生産性向上</h3>
+                        </div>
+                        <canvas id="efficiencyChart" width="400" height="200"></canvas>
+                        <div class="chart-note">※ A型事業所における導入効果（2023年度データ）</div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="tab-satisfaction">
+                    <div class="chart-container fade-in">
+                        <div class="chart-header">
+                            <h3>利用者・職員の満足度調査</h3>
+                        </div>
+                        <canvas id="satisfactionChart" width="400" height="200"></canvas>
+                        <div class="chart-note">※ 5段階評価、20事業所平均（2023年度データ）</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ユースケースセクション -->
+    <section class="usecase-section">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>活用事例と成果</h2>
+                <p>AI活用によって実現した具体的な事例</p>
+            </div>
+            
+            <div class="usecase-container">
+                <div class="usecase-card fade-in">
+                    <div class="usecase-header">
+                        <h3>食品加工工程の品質管理</h3>
+                        <p>B型事業所の事例</p>
+                    </div>
+                    <div class="usecase-content">
+                        <div class="usecase-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>AIカメラによる製品検品を導入し、不良品の検出精度を向上。検品作業の効率化を実現しました。</div>
+                        </div>
+                        <div class="usecase-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>障害特性に合わせた作業手順書をAIが自動生成。一人ひとりに最適な作業方法を提供しました。</div>
+                        </div>
+                        <div class="usecase-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>AI分析による工程最適化で、無駄な作業を削減し生産性を向上させました。</div>
+                        </div>
+                        
+                        <div class="usecase-results">
+                            <h4>導入効果</h4>
+                            <div class="result-item">
+                                <span class="result-label">検品速度</span>
+                                <span class="result-value">2倍に向上</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">不良品率</span>
+                                <span class="result-value">8%→1%に低下</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">平均工賃</span>
+                                <span class="result-value">43%向上</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="usecase-card fade-in">
+                    <div class="usecase-header green">
+                        <h3>事務業務の効率化</h3>
+                        <p>A型事業所の事例</p>
+                    </div>
+                    <div class="usecase-content">
+                        <div class="usecase-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>AIによる自動データ入力システムを導入し、請求書処理や勤怠管理業務を効率化しました。</div>
+                        </div>
+                        <div class="usecase-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>AIタスク配分システムにより、利用者の特性に合わせた最適な業務割り当てを実現しました。</div>
+                        </div>
+                        <div class="usecase-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>チャットボットを活用した業務マニュアル検索で、自立的な業務遂行をサポートしました。</div>
+                        </div>
+                        
+                        <div class="usecase-results">
+                            <h4>導入効果</h4>
+                            <div class="result-item">
+                                <span class="result-label">事務工数</span>
+                                <span class="result-value">週20時間→7時間に削減</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">プロジェクト完了率</span>
+                                <span class="result-value">35%向上</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">職員満足度</span>
+                                <span class="result-value">3.2→4.5点に向上（5点満点）</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 導入前後比較セクション -->
+    <section class="comparison-section">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>AI導入前後の比較</h2>
+                <p>AI活用前と後での業務環境の変化</p>
+            </div>
+            
+            <div class="comparison-container">
+                <div class="comparison-item before-item fade-in">
+                    <div class="comparison-header">
+                        <i class="fas fa-hourglass-half"></i>
+                        <h3>導入前</h3>
+                    </div>
+                    <ul class="comparison-list">
+                        <li>
+                            <i class="fas fa-times"></i>
+                            <div>単純作業が中心で、工賃は低水準</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-times"></i>
+                            <div>事務処理や報告書作成に膨大な時間</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-times"></i>
+                            <div>作業効率や品質に個人差が大きい</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-times"></i>
+                            <div>職員のサポート時間が限られる</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-times"></i>
+                            <div>新規業務の受注が難しい</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-times"></i>
+                            <div>利用者のスキル習得機会が少ない</div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="comparison-item after-item fade-in">
+                    <div class="comparison-header">
+                        <i class="fas fa-rocket"></i>
+                        <h3>導入後</h3>
+                    </div>
+                    <ul class="comparison-list">
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <div>高付加価値業務の増加で工賃アップ</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <div>AI活用で事務作業が大幅に削減</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <div>AIサポートで作業品質が均一化</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <div>職員の利用者サポート時間増加</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <div>AI関連の新規受注が可能に</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <div>デジタルスキル習得で成長機会創出</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROIセクション -->
+    <section class="roi-section">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>投資対効果（ROI）</h2>
+                <p>AI活用教育プログラム導入による経済効果</p>
+            </div>
+            
+            <div class="roi-container">
+                <div class="roi-card fade-in">
+                    <div class="roi-header">
+                        <h3>導入コストと回収シミュレーション</h3>
+                        <p>中規模B型事業所（利用者20名）の場合</p>
+                    </div>
+                    
+                    <div class="roi-chart">
+                        <canvas id="roiChart" width="400" height="300"></canvas>
+                    </div>
+                    
+                    <div class="roi-details">
+                        <div class="roi-detail-item">
+                            <div class="roi-detail-value">5.2ヶ月</div>
+                            <div class="roi-detail-label">平均投資回収期間</div>
+                        </div>
+                        <div class="roi-detail-item">
+                            <div class="roi-detail-value">267%</div>
+                            <div class="roi-detail-label">1年目ROI<br>(補助金活用時)</div>
+                        </div>
+                        <div class="roi-detail-item">
+                            <div class="roi-detail-value">132万円</div>
+                            <div class="roi-detail-label">6ヶ月後の<br>生産性向上利益</div>
+                        </div>
+                    </div>
+                    
+                    <div class="supplemental-info">
+                        <p>※ 補助金活用で初期費用を最大80%削減できるケースがあります。厚生労働省「福祉事業所DX推進補助金」など、申請サポートも行っています。</p>
+                    </div>
+                </div>
+                
+                <div class="roi-card fade-in">
+                    <div class="roi-header">
+                        <h3>事業収益向上と工賃アップの両立</h3>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="incomeBalanceChart" width="400" height="200"></canvas>
+                    </div>
+                    
+                    <p style="margin-top: 20px;">AI導入により業務効率が向上し、同じ時間でより多くの仕事をこなせるようになります。これにより事業所の売上が増加すると同時に、利用者への工賃も向上。事業所と利用者双方にメリットがある持続可能なモデルを実現します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA セクション -->
+    <section class="cta-section">
+        <div class="container cta-container">
+            <h2 class="cta-title">あなたの事業所にも、最適なAI活用法があります</h2>
+            <p class="cta-description">事業所の状況やニーズに合わせたAI活用プランをご提案します。まずは無料相談でお気軽にご相談ください。</p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="cta-primary">無料相談する</a>
+                <a href="case-studies.html" class="cta-secondary">導入事例を見る</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <img src="https://via.placeholder.com/30x30" alt="ロゴ">
+                        AI教育プログラム
+                    </div>
+                    <p>就労継続支援事業所向けのAI活用教育プログラムを提供し、事業所の収益向上と就労者のスキルアップをサポートします。</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>プログラム</h3>
+                    <ul>
+                        <li><a href="program-a.html">プログラムA（業務効率化）</a></li>
+                        <li><a href="program-b.html">プログラムB（AIスキル習得）</a></li>
+                        <li><a href="curriculum.html">カリキュラム詳細</a></li>
+                        <li><a href="effects.html">導入効果</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>導入事例</h3>
+                    <ul>
+                        <li><a href="case-type-a.html">A型事業所事例</a></li>
+                        <li><a href="case-type-b.html">B型事業所事例</a></li>
+                        <li><a href="testimonials.html">お客様の声</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>お問い合わせ</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 〒123-4567 岐阜県岐阜市〇〇町1-1-1</p>
+                    <p><i class="fas fa-phone"></i> 058-XXX-XXXX</p>
+                    <p><i class="fas fa-envelope"></i> info@ai-education.jp</p>
+                    <a href="contact.html" class="cta-button" style="display: inline-block; margin-top: 15px;">お問い合わせ</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 AI活用教育プログラム. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ハンバーガーメニューの開閉
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            hamburger.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+            });
+            
+            // タブ切り替え
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // タブボタンのアクティブ状態切り替え
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // タブコンテンツの表示切り替え
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // スクロールアニメーション
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                fadeInObserver.observe(element);
+            });
+            
+            // 工賃推移グラフ
+            const wageCtx = document.getElementById('wageChart').getContext('2d');
+            const wageChart = new Chart(wageCtx, {
+                type: 'line',
+                data: {
+                    labels: ['導入前', '1ヶ月後', '3ヶ月後', '6ヶ月後', '12ヶ月後'],
+                    datasets: [{
+                        label: '平均工賃（月額）',
+                        data: [14200, 15300, 16800, 19500, 23000],
+                        borderColor: 'rgba(52, 152, 219, 1)',
+                        backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '月額平均工賃の推移',
+                            font: { size: 16 }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: '金額（円）'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 業務効率化グラフ
+            const efficiencyCtx = document.getElementById('efficiencyChart').getContext('2d');
+            const efficiencyChart = new Chart(efficiencyCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['作業処理量', '事務作業時間', 'エラー率', '職員サポート時間'],
+                    datasets: [
+                        {
+                            label: '導入前',
+                            data: [100, 100, 100, 100],
+                            backgroundColor: 'rgba(149, 165, 166, 0.7)',
+                        },
+                        {
+                            label: '導入6ヶ月後',
+                            data: [210, 38, 22, 175],
+                            backgroundColor: 'rgba(46, 204, 113, 0.7)',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '業務効率の変化（導入前を100とした相対値）',
+                            font: { size: 16 }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '相対値'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 満足度グラフ
+            const satisfactionCtx = document.getElementById('satisfactionChart').getContext('2d');
+            const satisfactionChart = new Chart(satisfactionCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['仕事の満足度', '成長実感', '収入満足度', '技術習得', '職場環境', '将来性'],
+                    datasets: [
+                        {
+                            label: '導入前',
+                            data: [2.8, 2.4, 2.2, 2.0, 3.1, 2.5],
+                            backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                            borderColor: 'rgba(52, 152, 219, 1)',
+                            pointBackgroundColor: 'rgba(52, 152, 219, 1)',
+                            borderWidth: 2,
+                        },
+                        {
+                            label: '導入6ヶ月後',
+                            data: [4.1, 4.3, 3.8, 4.5, 4.2, 4.0],
+                            backgroundColor: 'rgba(46, 204, 113, 0.2)',
+                            borderColor: 'rgba(46, 204, 113, 1)',
+                            pointBackgroundColor: 'rgba(46, 204, 113, 1)',
+                            borderWidth: 2,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true
+                            },
+                            min: 0,
+                            max: 5,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // ROIグラフ
+            const roiCtx = document.getElementById('roiChart').getContext('2d');
+            const roiChart = new Chart(roiCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['初期投資', '3ヶ月後', '6ヶ月後', '12ヶ月後'],
+                    datasets: [
+                        {
+                            label: '累積コスト',
+                            data: [120, 165, 210, 300],
+                            backgroundColor: 'rgba(231, 76, 60, 0.7)',
+                            borderColor: 'rgba(231, 76, 60, 1)',
+                            borderWidth: 1,
+                            stack: 'Stack 0',
+                        },
+                        {
+                            label: '累積収益効果',
+                            data: [0, 90, 185, 425],
+                            backgroundColor: 'rgba(46, 204, 113, 0.7)',
+                            borderColor: 'rgba(46, 204, 113, 1)',
+                            borderWidth: 1,
+                            stack: 'Stack 1',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '金額（万円）'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'AI導入コストと収益効果の推移',
+                            font: { size: 16 }
+                        }
+                    }
+                }
+            });
+            
+            // 収益と工賃バランスグラフ
+            const incomeBalanceCtx = document.getElementById('incomeBalanceChart').getContext('2d');
+            const incomeBalanceChart = new Chart(incomeBalanceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['導入前', '3ヶ月後', '6ヶ月後', '12ヶ月後'],
+                    datasets: [
+                        {
+                            label: '事業所月間売上（万円）',
+                            data: [150, 180, 210, 250],
+                            backgroundColor: 'rgba(52, 152, 219, 0.7)',
+                            borderColor: 'rgba(52, 152, 219, 1)',
+                            borderWidth: 1,
+                            yAxisID: 'y',
+                        },
+                        {
+                            type: 'line',
+                            label: '平均工賃（千円）',
+                            data: [14.2, 16.8, 19.5, 23.0],
+                            backgroundColor: 'rgba(243, 156, 18, 0.7)',
+                            borderColor: 'rgba(243, 156, 18, 1)',
+                            borderWidth: 2,
+                            fill: false,
+                            tension: 0.4,
+                            yAxisID: 'y1',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: '事業所売上（万円）'
+                            }
+                        },
+                        y1: {
+                            beginAtZero: true,
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            grid: {
+                                drawOnChartArea: false,
+                            },
+                            title: {
+                                display: true,
+                                text: '平均工賃（千円）'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

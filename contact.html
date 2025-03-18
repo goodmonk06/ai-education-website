@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせ - AI活用教育プログラム</title>
+    <meta name="description" content="就労継続支援A型・B型事業所向けAI活用教育プログラムについてのお問い合わせ。無料相談も受け付けています。">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #f39c12;
+            --text-color: #333333;
+            --bg-color: #f5f5f5;
+            --white: #ffffff;
+            --light-gray: #e0e0e0;
+            --dark-gray: #555555;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* ヘッダー */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 30px;
+            position: relative;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            display: block;
+            padding: 5px 0;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-menu .dropdown {
+            position: relative;
+        }
+        
+        .nav-menu .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--white);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .nav-menu .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .nav-menu .dropdown-content a {
+            padding: 12px 16px;
+            display: block;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .nav-menu .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        
+        .nav-menu .dropdown-content a:hover {
+            background-color: var(--bg-color);
+        }
+        
+        .cta-button {
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #e67e22;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 24px;
+        }
+        
+        /* ページヘッダー */
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://source.unsplash.com/random/1600x400/?contact,office');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 70px;
+            position: relative;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.8), rgba(243, 156, 18, 0.4));
+            z-index: 1;
+        }
+        
+        .page-header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .page-header h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            font-family: 'Noto Serif JP', serif;
+        }
+        
+        .page-header p {
+            font-size: 18px;
+            margin-bottom: 0;
+        }
+        
+        /* パンくずリスト */
+        .breadcrumb {
+            background-color: var(--white);
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .breadcrumb-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .breadcrumb-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .breadcrumb-item:not(:last-child)::after {
+            content: '\f105';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            margin: 0 10px;
+            color: var(--dark-gray);
+        }
+        
+        .breadcrumb-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item.active {
+            color: var(--dark-gray);
+        }
+        
+        /* セクション共通 */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-family: 'Noto Serif JP', serif;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title p {
+            font-size: 18px;
+            color: var(--dark-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* お問い合わせフォームセクション */
+        .contact-section {
+            background-color: var(--white);
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+        
+        .contact-form-wrap {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .required::after {
+            content: '*';
+            color: #e74c3c;
+            margin-left: 5px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            font-size: 16px;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L0 0h12z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 12px;
+        }
+        
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .radio-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .radio-label input {
+            margin-right: 8px;
+        }
+        
+        .form-check {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 15px;
+        }
+        
+        .form-check input {
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+        
+        .submit-button {
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-button:hover {
+            background-color: #e67e22;
+            transform: translateY(-3px);
+        }
+        
+        /* お問い合わせ情報 */
+        .contact-info {
+            background-color: #f7fbff;
+            padding: 30px;
+            border-radius: 10px;
+        }
+        
+        .info-title {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        .info-item {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .info-content h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        /* フロー */
+        .flow-section {
+            background-color: #f0f8ff;
+        }
+        
+        .flow-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .flow-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .flow-step:last-child {
+            margin-bottom: 0;
+        }
+        
+        .flow-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 25px;
+            top: 60px;
+            width: 2px;
+            height: calc(100% - 25px);
+            background-color: var(--light-gray);
+        }
+        
+        .flow-number {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .flow-content {
+            flex-grow: 1;
+        }
+        
+        .flow-content h3 {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        /* FAQ */
+        .faq-section {
+            background-color: var(--white);
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 15px 20px;
+            background-color: #f7fbff;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question h3 {
+            font-size: 18px;
+            margin: 0;
+            color: var(--primary-color);
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        /* フッター */
+        footer {
+            background-color: #333;
+            color: var(--white);
+            padding: 80px 0 30px;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 50px;
+            background-color: var(--white);
+            top: 0;
+            left: 0;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 0);
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--white);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-logo img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        
+        .footer-links h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: block;
+            padding: 5px 0;
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+        
+        .footer-contact p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+        
+        .footer-social {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #444;
+            border-radius: 50%;
+            margin-right: 10px;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 50px;
+            border-top: 1px solid #444;
+        }
+        
+        /* アニメーション効果 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* レスポンシブデザイン */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-menu li {
+                margin: 10px 0;
+            }
+            
+            .nav-menu .dropdown-content {
+                position: static;
+                box-shadow: none;
+                display: none;
+                padding-left: 20px;
+            }
+            
+            .nav-menu .dropdown.active .dropdown-content {
+                display: block;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .page-header h1 {
+                font-size: 32px;
+            }
+            
+            .page-header p {
+                font-size: 16px;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .radio-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .flow-step {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .flow-number {
+                margin-bottom: 15px;
+            }
+            
+            .flow-step:not(:last-child)::after {
+                left: 25px;
+                top: 50px;
+                height: calc(100% - 25px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="https://via.placeholder.com/40x40" alt="ロゴ">
+                AI教育プログラム
+            </a>
+            <button class="hamburger" aria-label="メニュー">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu">
+                <li class="dropdown">
+                    <a href="programs.html">プログラム紹介 <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="program-a.html">プログラムA（業務効率化）</a>
+                        <a href="program-b.html">プログラムB（AIスキル習得）</a>
+                        <a href="curriculum.html">カリキュラム詳細</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="effects.html">導入効果 <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="effects-business.html">事業所向け効果</a>
+                        <a href="effects-worker.html">就労者向け効果</a>
+                        <a href="roi-calculator.html">投資回収シミュレーション</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="case-studies.html">導入事例 <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="case-type-a.html">A型事業所事例</a>
+                        <a href="case-type-b.html">B型事業所事例</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="pricing.html">料金・導入方法 <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="pricing-plans.html">料金プラン</a>
+                        <a href="implementation.html">導入ステップ</a>
+                        <a href="faq.html">よくある質問</a>
+                    </div>
+                </li>
+                <li><a href="contact.html" class="cta-button">お問い合わせ</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ページヘッダー -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <h1>お問い合わせ</h1>
+            <p>AI活用教育プログラムに関するご質問や無料相談はこちらから</p>
+        </div>
+    </div>
+
+    <!-- パンくずリスト -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item"><a href="index.html">ホーム</a></li>
+                <li class="breadcrumb-item active">お問い合わせ</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- お問い合わせフォームセクション -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>お問い合わせフォーム</h2>
+                <p>AI活用教育プログラムについてのご質問やご相談は、以下のフォームからお気軽にお問い合わせください。</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-form-wrap fade-in">
+                    <form id="contactForm" action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name" class="form-label required">お名前</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="facility" class="form-label required">事業所名</label>
+                            <input type="text" id="facility" name="facility" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="form-label required">メールアドレス</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone" class="form-label">電話番号</label>
+                            <input type="tel" id="phone" name="phone" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="facility_type" class="form-label required">事業所種別</label>
+                            <select id="facility_type" name="facility_type" class="form-select" required>
+                                <option value="">選択してください</option>
+                                <option value="a-type">就労継続支援A型事業所</option>
+                                <option value="b-type">就労継続支援B型事業所</option>
+                                <option value="transition">就労移行支援事業所</option>
+                                <option value="other">その他</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label required">希望するプログラム</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="program" value="program-a" required> プログラムA（業務効率化）
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="program" value="program-b"> プログラムB（AIスキル習得）
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="program" value="both"> 両方
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="program" value="undecided"> 未定（相談したい）
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message" class="form-label required">お問い合わせ内容</label>
+                            <textarea id="message" name="message" class="form-control" rows="6" required></textarea>
+                        </div>
+                        
+                        <div class="form-check">
+                            <input type="checkbox" id="privacy" name="privacy" required>
+                            <label for="privacy">個人情報保護方針に同意する</label>
+                        </div>
+                        
+                        <div style="margin-top: 30px;">
+                            <button type="submit" class="submit-button">送信する</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="contact-info fade-in">
+                    <h3 class="info-title">お問い合わせ先</h3>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>所在地</h4>
+                            <p>〒123-4567<br>岐阜県岐阜市〇〇町1-1-1</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>電話番号</h4>
+                            <p>058-XXX-XXXX</p>
+                            <p>受付時間：平日 9:00～17:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>メールアドレス</h4>
+                            <p>info@ai-education.jp</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>対応時間</h4>
+                            <p>平日 9:00～17:00<br>（土日祝日・年末年始を除く）</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 無料相談の流れセクション -->
+    <section class="flow-section">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>無料相談の流れ</h2>
+                <p>お問い合わせからプログラム導入までのステップをご紹介します</p>
+            </div>
+            
+            <div class="flow-container">
+                <div class="flow-step fade-in">
+                    <div class="flow-number">1</div>
+                    <div class="flow-content">
+                        <h3>お問い合わせ</h3>
+                        <p>まずはこのページのフォームまたはお電話でお問い合わせください。無料相談の日程を調整します。</p>
+                    </div>
+                </div>
+                
+                <div class="flow-step fade-in">
+                    <div class="flow-number">2</div>
+                    <div class="flow-content">
+                        <h3>ヒアリング（現状・課題整理）</h3>
+                        <p>事業所の現状や課題、AIに対する期待などをヒアリングします。対面またはオンラインで約60分程度を予定しています。</p>
+                    </div>
+                </div>
+                
+                <div class="flow-step fade-in">
+                    <div class="flow-number">3</div>
+                    <div class="flow-content">
+                        <h3>最適なAI活用プランのご提案</h3>
+                        <p>ヒアリング内容をもとに、事業所の状況に最適なAI活用プランをご提案します。導入効果や費用対効果についても具体的に説明します。</p>
+                    </div>
+                </div>
+                
+                <div class="flow-step fade-in">
+                    <div class="flow-number">4</div>
+                    <div class="flow-content">
+                        <h3>導入サポート・研修の実施</h3>
+                        <p>プランにご納得いただけましたら、導入のサポートと研修を実施します。事業所の状況に合わせて段階的に進めていきます。</p>
+                    </div>
+                </div>
+                
+                <div class="flow-step fade-in">
+                    <div class="flow-number">5</div>
+                    <div class="flow-content">
+                        <h3>効果測定とフォローアップ</h3>
+                        <p>導入後も定期的にフォローアップを行い、効果測定と改善提案を行います。継続的なサポートで確実な成果を目指します。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- よくある質問セクション -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>よくある質問</h2>
+                <p>お問い合わせの前によくいただく質問をまとめました</p>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <h3>AIの知識がない職員でも導入できますか？</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>はい、AIの知識がなくても問題ありません。プログラムは基礎から段階的に学べる内容になっており、専門スタッフが丁寧にサポートします。これまでの導入事例でも、多くの事業所が初めてAIに触れる状態からスタートし、成果を上げています。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <h3>料金はどのくらいかかりますか？</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>料金は事業所の規模や導入プログラムによって異なりますが、標準的なプラン（オンライン教材＋月1回の対面研修）で月額5万円〜、高度なサポートが必要な場合は月額10万円程度です。詳細は「料金プラン」ページをご確認いただくか、お問い合わせください。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <h3>どのくらいの期間で効果が出ますか？</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>基本的な効果は導入後3ヶ月程度から現れ始めます。単純作業の効率化などは比較的早く効果が表れ、平均工賃の向上など本格的な効果は6ヶ月〜1年かけて徐々に現れることが多いです。事業所の状況によって異なりますので、詳しくは無料相談でご説明いたします。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <h3>導入に必要なパソコンなどの環境はどうすればいいですか？</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>基本的にはインターネットに接続できるパソコンやタブレットがあれば導入可能です。既存の事業所の機器を活用できることがほとんどですが、必要に応じて推奨スペックや最適な環境についてアドバイスいたします。また、補助金を活用した機器導入のサポートも行っています。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <h3>障害特性に合わせたカスタマイズは可能ですか？</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>はい、可能です。利用者の障害特性や習熟度に合わせて、カリキュラムのカスタマイズを行います。視覚的な教材を多く取り入れたり、反復学習の機会を増やしたりなど、様々な工夫でスムーズな学習をサポートします。また、少人数制のグループ学習で、一人ひとりの進捗に合わせたきめ細かな指導を行います。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <img src="https://via.placeholder.com/30x30" alt="ロゴ">
+                        AI教育プログラム
+                    </div>
+                    <p>就労継続支援事業所向けのAI活用教育プログラムを提供し、事業所の収益向上と就労者のスキルアップをサポートします。</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>プログラム</h3>
+                    <ul>
+                        <li><a href="program-a.html">プログラムA（業務効率化）</a></li>
+                        <li><a href="program-b.html">プログラムB（AIスキル習得）</a></li>
+                        <li><a href="curriculum.html">カリキュラム詳細</a></li>
+                        <li><a href="effects.html">導入効果</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>導入事例</h3>
+                    <ul>
+                        <li><a href="case-type-a.html">A型事業所事例</a></li>
+                        <li><a href="case-type-b.html">B型事業所事例</a></li>
+                        <li><a href="testimonials.html">お客様の声</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>お問い合わせ</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 〒123-4567 岐阜県岐阜市〇〇町1-1-1</p>
+                    <p><i class="fas fa-phone"></i> 058-XXX-XXXX</p>
+                    <p><i class="fas fa-envelope"></i> info@ai-education.jp</p>
+                    <a href="contact.html" class="cta-button" style="display: inline-block; margin-top: 15px;">お問い合わせ</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 AI活用教育プログラム. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ハンバーガーメニューの開閉
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            hamburger.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+            });
+            
+            // FAQ アコーディオン
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // スクロールアニメーション
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                fadeInObserver.observe(element);
+            });
+            
+            // フォームバリデーション
+            const form = document.getElementById('contactForm');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // 簡易バリデーション
+                let isValid = true;
+                const requiredFields = form.querySelectorAll('[required]');
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.classList.add('invalid');
+                    } else {
+                        field.classList.remove('invalid');
+                    }
+                });
+                
+                if (isValid) {
+                    // ここに実際の送信処理を記述
+                    alert('お問い合わせありがとうございます。確認後、担当者よりご連絡いたします。');
+                    form.reset();
+                } else {
+                    alert('必須項目をすべて入力してください。');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

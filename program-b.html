@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プログラムB（AIスキル習得） - AI活用教育プログラム</title>
+    <meta name="description" content="就労継続支援A型・B型事業所向けのAIスキル習得プログラム。パソコンの基礎からAIツールの活用まで、ステップバイステップで学べます。">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #f39c12;
+            --text-color: #333333;
+            --bg-color: #f5f5f5;
+            --white: #ffffff;
+            --light-gray: #e0e0e0;
+            --dark-gray: #555555;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* ヘッダー */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 30px;
+            position: relative;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            display: block;
+            padding: 5px 0;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-menu .dropdown {
+            position: relative;
+        }
+        
+        .nav-menu .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--white);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .nav-menu .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .nav-menu .dropdown-content a {
+            padding: 12px 16px;
+            display: block;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .nav-menu .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        
+        .nav-menu .dropdown-content a:hover {
+            background-color: var(--bg-color);
+        }
+        
+        .cta-button {
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #e67e22;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 24px;
+        }
+        
+        /* ページヘッダー */
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://source.unsplash.com/random/1600x400/?education,technology');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 70px;
+            position: relative;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.8), rgba(46, 204, 113, 0.4));
+            z-index: 1;
+        }
+        
+        .page-header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .page-header h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            font-family: 'Noto Serif JP', serif;
+        }
+        
+        .page-header p {
+            font-size: 18px;
+            margin-bottom: 0;
+        }
+        
+        /* パンくずリスト */
+        .breadcrumb {
+            background-color: var(--white);
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .breadcrumb-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .breadcrumb-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .breadcrumb-item:not(:last-child)::after {
+            content: '\f105';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            margin: 0 10px;
+            color: var(--dark-gray);
+        }
+        
+        .breadcrumb-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item.active {
+            color: var(--dark-gray);
+        }
+        
+        /* セクション共通 */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-family: 'Noto Serif JP', serif;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title p {
+            font-size: 18px;
+            color: var(--dark-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* プログラム概要セクション */
+        .program-overview {
+            background-color: var(--white);
+        }
+        
+        .program-detail {
+            margin-bottom: 40px;
+        }
+        
+        .curriculum-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .curriculum-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .curriculum-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .curriculum-header {
+            background-color: rgba(46, 204, 113, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .curriculum-header .circle {
+            width: 80px;
+            height: 80px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--white);
+            font-size: 36px;
+        }
+        
+        .curriculum-header h3 {
+            font-size: 22px;
+            color: var(--secondary-color);
+        }
+        
+        .curriculum-content {
+            padding: 30px;
+        }
+        
+        .curriculum-content p {
+            margin-bottom: 20px;
+        }
+        
+        .curriculum-list {
+            list-style: none;
+        }
+        
+        .curriculum-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--light-gray);
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .curriculum-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .curriculum-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+        }
+        
+        /* プログラム特徴セクション */
+        .program-features {
+            background-color: #f0f8ff;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-item {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(46, 204, 113, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            font-size: 28px;
+        }
+        
+        .feature-item h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+        
+        /* 成功事例セクション */
+        .success-cases {
+            background-color: var(--white);
+        }
+        
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .case-item {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .case-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .case-content {
+            padding: 25px;
+        }
+        
+        .case-type {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border-radius: 5px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .case-content h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+        
+        .case-results {
+            background-color: var(--bg-color);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        
+        .case-results h4 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .result-label {
+            color: var(--dark-gray);
+        }
+        
+        .result-value {
+            font-weight: bold;
+        }
+        
+        /* ステップセクション */
+        .implementation-steps {
+            background-color: #e8f8f5;
+        }
+        
+        .steps-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .step-item {
+            display: flex;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .step-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .step-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: 40px;
+            width: 2px;
+            height: calc(100% - 20px);
+            background-color: var(--light-gray);
+        }
+        
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin-right: 30px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-content {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            flex-grow: 1;
+        }
+        
+        .step-content h3 {
+            font-size: 22px;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        
+        /* 料金セクション */
+        .pricing-section {
+            background-color: var(--white);
+        }
+        
+        .pricing-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .pricing-card {
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .pricing-header {
+            background: linear-gradient(135deg, var(--secondary-color), #27ae60);
+            color: var(--white);
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .pricing-header h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .pricing-price {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .pricing-period {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .pricing-features {
+            padding: 30px;
+        }
+        
+        .pricing-features ul {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .pricing-features li i {
+            color: var(--secondary-color);
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+        
+        .pricing-button {
+            display: block;
+            text-align: center;
+        }
+        
+        /* CTA セクション */
+        .cta-section {
+            background: linear-gradient(135deg, var(--secondary-color), #27ae60);
+            color: var(--white);
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            top: -150px;
+            left: -150px;
+        }
+        
+        .cta-section::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            bottom: -100px;
+            right: -100px;
+        }
+        
+        .cta-container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-family: 'Noto Serif JP', serif;
+        }
+        
+        .cta-description {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .cta-primary {
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-primary:hover {
+            background-color: #e67e22;
+            transform: translateY(-3px);
+        }
+        
+        .cta-secondary {
+            background-color: transparent;
+            color: var(--white);
+            padding: 14px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            border: 2px solid var(--white);
+            transition: all 0.3s ease;
+        }
+        
+        .cta-secondary:hover {
+            background-color: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+        
+        /* フッター */
+        footer {
+            background-color: #333;
+            color: var(--white);
+            padding: 80px 0 30px;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 50px;
+            background-color: var(--white);
+            top: 0;
+            left: 0;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 0);
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--white);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-logo img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        
+        .footer-links h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: block;
+            padding: 5px 0;
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+        
+        .footer-contact p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+        
+        .footer-social {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #444;
+            border-radius: 50%;
+            margin-right: 10px;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 50px;
+            border-top: 1px solid #444;
+        }
+        
+        /* アニメーション効果 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* レスポンシブデザイン */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-menu li {
+                margin: 10px 0;
+            }
+            
+            .nav-menu .dropdown-content {
+                position: static;
+                box-shadow: none;
+                display: none;
+                padding-left: 20px;
+            }
+            
+            .nav-menu .dropdown.active .dropdown-content {
+                display: block;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .page-header h1 {
+                font-size: 32px;
+            }
+            
+            .page-header p {
+                font-size: 16px;
+            }
+            
+            .step-item {
+                flex-direction: column;
+            }
+            
+            .step-number {
+                margin-bottom: 20px;
+                margin-right: 0;
+            }
+            
+            .step-item:not(:last-child)::after {
+                left: 40px;
+                top: 80px;
+                height: calc(100% - 80px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="https://via.placeholder.com/40x40" alt="ロゴ">
+                AI教育プログラム
+            </a>
+            <button class="hamburger" aria-label="メニュー">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu">
+                <li class="dropdown">
+                    <a href="programs.html">プログラム紹介 <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="program-a.html">プログラムA（業務効率化）</a>
+                        <a href="program-b.html">プログラムB（AIスキル習得）</a>
+                        <a href="curriculum.html">カリキュラム詳細</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="effects.html">導入効果 <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="effects-business.html">事業所向け効果</a>
+                        <a href="effects-worker.html">就労者向け効果</a>
+                        <a href="roi-calculator.html">投資回収シミュレーション</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="case-studies.html">導入事例 <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="case-type-a.html">A型事業所事例</a>
+                        <a href="case-type-b.html">B型事業所事例</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="pricing.html">料金・導入方法 <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="pricing-plans.html">料金プラン</a>
+                        <a href="implementation.html">導入ステップ</a>
+                        <a href="faq.html">よくある質問</a>
+                    </div>
+                </li>
+                <li><a href="contact.html" class="cta-button">お問い合わせ</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ページヘッダー -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <h1>プログラムB（AIスキル習得）</h1>
+            <p>パソコンの基礎からAIツールの実践的な活用まで、段階的に学べるカリキュラム</p>
+        </div>
+    </div>
+
+    <!-- パンくずリスト -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item"><a href="index.html">ホーム</a></li>
+                <li class="breadcrumb-item"><a href="programs.html">プログラム紹介</a></li>
+                <li class="breadcrumb-item active">プログラムB（AIスキル習得）</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- プログラム概要セクション -->
+    <section class="program-overview">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>プログラムB 概要</h2>
+                <p>AIリテラシーの習得から実務応用まで、ステップバイステップで学ぶAIスキル習得プログラム</p>
+            </div>
+            <div class="program-detail fade-in">
+                <div class="row" style="display: flex; flex-wrap: wrap; margin-bottom: 40px;">
+                    <div class="col" style="flex: 1; min-width: 300px; padding: 0 15px; margin-bottom: 30px;">
+                        <h3 style="color: var(--secondary-color); margin-bottom: 20px; font-size: 24px;">プログラムの目的</h3>
+                        <p>就労継続支援施設で働く利用者と支援員が、パソコンの基本操作からAIツールの活用まで段階的に学ぶことで、デジタルスキルを向上させ、新しい仕事の可能性を広げることを目的としています。</p>
+                        <p style="margin-top: 15px;">AI時代に対応した人材育成を通じて、就労者の可能性を最大限に引き出し、工賃・賃金の向上と社会参加の促進を図ります。</p>
+                    </div>
+                    <div class="col" style="flex: 1; min-width: 300px; padding: 0 15px; margin-bottom: 30px;">
+                        <h3 style="color: var(--secondary-color); margin-bottom: 20px; font-size: 24px;">対象者</h3>
+                        <ul style="list-style-type: none; padding: 0;">
+                            <li style="padding: 8px 0; position: relative; padding-left: 25px;"><i class="fas fa-check" style="color: var(--secondary-color); position: absolute; left: 0;"></i> 就労継続支援A型・B型事業所</li>
+                            <li style="padding: 8px 0; position: relative; padding-left: 25px;"><i class="fas fa-check" style="color: var(--secondary-color); position: absolute; left: 0;"></i> デジタルスキル向上を目指す利用者</li>
+                            <li style="padding: 8px 0; position: relative; padding-left: 25px;"><i class="fas fa-check" style="color: var(--secondary-color); position: absolute; left: 0;"></i> AI活用を検討している支援員・管理者</li>
+                            <li style="padding: 8px 0; position: relative; padding-left: 25px;"><i class="fas fa-check" style="color: var(--secondary-color); position: absolute; left: 0;"></i> 新たな作業領域の開拓を目指す事業所</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="curriculum-container fade-in">
+                <div class="curriculum-card">
+                    <div class="curriculum-header">
+                        <div class="circle">1</div>
+                        <h3>基礎編 - AIリテラシー基礎</h3>
+                    </div>
+                    <div class="curriculum-content">
+                        <p>パソコンの基本操作からインターネットの使い方、そしてAIの基礎知識を学びます。初心者でも無理なく始められるカリキュラムです。</p>
+                        <ul class="curriculum-list">
+                            <li>パソコンの基本操作とインターネット活用</li>
+                            <li>Officeソフトの基本的な使い方</li>
+                            <li>AIとは何か？身近なAI技術の紹介</li>
+                            <li>情報セキュリティの基礎知識</li>
+                            <li>タイピング練習と基本的なデータ管理</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="curriculum-card">
+                    <div class="curriculum-header">
+                        <div class="circle">2</div>
+                        <h3>実践編 - AIツール活用</h3>
+                    </div>
+                    <div class="curriculum-content">
+                        <p>実際に業務で活用できるAIツールの使い方をハンズオン形式で習得します。各事業所の作業内容に合わせてカスタマイズします。</p>
+                        <ul class="curriculum-list">
+                            <li>文章生成AI（ChatGPT等）を使った文書作成</li>
+                            <li>表計算ソフトとAIの連携によるデータ分析</li>
+                            <li>画像生成AIを活用したデザイン作業</li>
+                            <li>AIアプリの活用方法（プログラミング不要）</li>
+                            <li>AI活用による作業効率化の実践</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="curriculum-card">
+                    <div class="curriculum-header">
+                        <div class="circle">3</div>
+                        <h3>応用編 - 実務プロジェクト</h3>
+                    </div>
+                    <div class="curriculum-content">
+                        <p>学んだスキルを実際の業務に応用する段階です。利用者と支援員が協力し、小さなプロジェクトを遂行します。</p>
+                        <ul class="curriculum-list">
+                            <li>AI活用による業務改善プロジェクト</li>
+                            <li>事業所独自の課題解決にAIを活用</li>
+                            <li>新規事業アイデアの創出と試作</li>
+                            <li>AI活用成果の発表と共有</li>
+                            <li>継続的な学習とスキルアップの方法</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- プログラム特徴セクション -->
+    <section class="program-features">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>プログラムの特徴</h2>
+                <p>他にはない、AI教育プログラムの強み</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>障害特性に配慮したカリキュラム</h3>
+                    <p>利用者の障害特性や習熟度に合わせて、無理なく学べるようにカリキュラムをカスタマイズします。視覚的な教材や反復学習の機会を多く取り入れています。</p>
+                </div>
+                
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>少人数制グループ学習</h3>
+                    <p>最大10名までの少人数制で、一人ひとりの進捗に合わせたサポートを提供します。グループワークを通じて学び合いの場も創出します。</p>
+                </div>
+                
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>実践重視のハンズオン形式</h3>
+                    <p>理論よりも実践を重視し、実際に手を動かしながら学べるハンズオン形式を採用。すぐに現場で活かせるスキルを習得できます。</p>
+                </div>
+                
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>反復学習と継続サポート</h3>
+                    <p>学んだ内容を定着させるための復習教材や、研修後も質問できるオンラインサポートを提供。継続的な学習をバックアップします。</p>
+                </div>
+                
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>現場課題に基づくプロジェクト学習</h3>
+                    <p>各事業所の実際の課題をテーマにしたプロジェクト学習で、学んだスキルを実務に直結させます。成果が目に見えるため、モチベーション維持にも効果的です。</p>
+                </div>
+                
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>スキル修得認定制度</h3>
+                    <p>一定レベルのスキルを修得した利用者には認定証を発行。ステップアップの目標を明確にし、達成感を得られる仕組みを提供します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 成功事例セクション -->
+    <section class="success-cases">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>スキル習得の成功事例</h2>
+                <p>AIスキル習得により新たな可能性を広げた事例</p>
+            </div>
+            
+            <div class="case-grid">
+                <div class="case-item fade-in">
+                    <img src="https://source.unsplash.com/random/400x200/?computer,people" alt="スキル習得事例1" class="case-image">
+                    <div class="case-content">
+                        <span class="case-type">B型事業所</span>
+                        <h3>文書作成業務の効率化と質の向上</h3>
+                        <p>ChatGPTを活用した文書作成・校正スキルを習得し、地元企業のニュースレター作成業務を受注。</p>
+                        <div class="case-results">
+                            <h4>習得効果</h4>
+                            <div class="result-item">
+                                <span class="result-label">作業スピード</span>
+                                <span class="result-value">2.5倍に向上</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">新規受注</span>
+                                <span class="result-value">3社の定期契約獲得</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">平均工賃</span>
+                                <span class="result-value">32%アップ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="case-item fade-in">
+                    <img src="https://source.unsplash.com/random/400x200/?art,digital" alt="スキル習得事例2" class="case-image">
+                    <div class="case-content">
+                        <span class="case-type">A型事業所</span>
+                        <h3>AI画像生成スキルによるデザイン業務</h3>
+                        <p>Midjourney等のAI画像生成ツールの活用スキルを習得し、地域企業のチラシやSNS画像制作業務を開始。</p>
+                        <div class="case-results">
+                            <h4>習得効果</h4>
+                            <div class="result-item">
+                                <span class="result-label">デザイン単価</span>
+                                <span class="result-value">従来の1.8倍</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">受注件数</span>
+                                <span class="result-value">月20件以上</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">利用者満足度</span>
+                                <span class="result-value">89%（創造性向上）</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="case-item fade-in">
+                    <img src="https://source.unsplash.com/random/400x200/?data,technology" alt="スキル習得事例3" class="case-image">
+                    <div class="case-content">
+                        <span class="case-type">B型事業所</span>
+                        <h3>データ入力・分析スキルの習得</h3>
+                        <p>AIを活用したデータ処理・分析スキルを習得し、地域の調査会社からデータ入力・分析補助業務を受注。</p>
+                        <div class="case-results">
+                            <h4>習得効果</h4>
+                            <div class="result-item">
+                                <span class="result-label">データ処理量</span>
+                                <span class="result-value">3倍に増加</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">エラー率</span>
+                                <span class="result-value">12%→2%に低下</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">継続就労率</span>
+                                <span class="result-value">78%→92%に向上</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 導入ステップセクション -->
+    <section class="implementation-steps">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>導入ステップ</h2>
+                <p>スムーズな導入のための5つのステップ</p>
+            </div>
+            
+            <div class="steps-container">
+                <div class="step-item fade-in">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>現状分析・ニーズヒアリング</h3>
+                        <p>事業所の現状や利用者のスキルレベル、ITインフラ環境などを詳しくヒアリング。AIスキル習得によって実現したい目標や取り組みたい業務を明確にします。</p>
+                    </div>
+                </div>
+                
+                <div class="step-item fade-in">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>カリキュラムカスタマイズ</h3>
+                        <p>ヒアリング結果をもとに、事業所の特性や目標に合わせたカリキュラムを設計。利用者の障害特性や習熟度に配慮した教材も用意します。</p>
+                    </div>
+                </div>
+                
+                <div class="step-item fade-in">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>段階的なトレーニング実施</h3>
+                        <p>基礎編・実践編・応用編の3ステップで順序立てて学習。各段階で習熟度を確認しながら、無理なくスキルを身につけられるよう支援します。</p>
+                    </div>
+                </div>
+                
+                <div class="step-item fade-in">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>実務プロジェクト実施</h3>
+                        <p>習得したスキルを実務に活かすためのプロジェクトを実施。実際の業務改善や新規業務の創出に取り組み、スキルの定着を図ります。</p>
+                    </div>
+                </div>
+                
+                <div class="step-item fade-in">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>継続サポート・スキルアップ支援</h3>
+                        <p>プログラム終了後も、オンラインでの質問対応や定期的なフォローアップ研修を実施。最新のAI技術情報も提供し、継続的なスキルアップを支援します。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 料金セクション -->
+    <section class="pricing-section">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>プログラム料金</h2>
+                <p>事業所のニーズに合わせた柔軟な料金プラン</p>
+            </div>
+            
+            <div class="pricing-container">
+                <div class="pricing-card fade-in">
+                    <div class="pricing-header">
+                        <h3>スタンダードプラン</h3>
+                        <div class="pricing-price">¥50,000</div>
+                        <div class="pricing-period">/ 月（6ヶ月契約）</div>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> 基礎編・実践編カリキュラム提供</li>
+                            <li><i class="fas fa-check-circle"></i> 月1回の訪問研修（3時間）</li>
+                            <li><i class="fas fa-check-circle"></i> オンライン学習教材提供</li>
+                            <li><i class="fas fa-check-circle"></i> メールサポート（平日対応）</li>
+                            <li><i class="fas fa-check-circle"></i> 利用者10名まで受講可能</li>
+                        </ul>
+                        <a href="contact.html" class="cta-primary pricing-button">お問い合わせ</a>
+                    </div>
+                </div>
+                
+                <div class="pricing-card fade-in">
+                    <div class="pricing-header">
+                        <h3>プレミアムプラン</h3>
+                        <div class="pricing-price">¥80,000</div>
+                        <div class="pricing-period">/ 月（6ヶ月契約）</div>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> 全カリキュラム（応用編含む）提供</li>
+                            <li><i class="fas fa-check-circle"></i> 月2回の訪問研修（各3時間）</li>
+                            <li><i class="fas fa-check-circle"></i> プロジェクト実施サポート</li>
+                            <li><i class="fas fa-check-circle"></i> 電話・メールサポート（平日対応）</li>
+                            <li><i class="fas fa-check-circle"></i> 利用者20名まで受講可能</li>
+                            <li><i class="fas fa-check-circle"></i> AIツール導入コンサルティング</li>
+                        </ul>
+                        <a href="contact.html" class="cta-primary pricing-button">お問い合わせ</a>
+                    </div>
+                </div>
+                
+                <div class="pricing-card fade-in">
+                    <div class="pricing-header">
+                        <h3>カスタムプラン</h3>
+                        <div class="pricing-price">要相談</div>
+                        <div class="pricing-period">事業所の状況に応じたプラン</div>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> 完全オーダーメイドカリキュラム</li>
+                            <li><i class="fas fa-check-circle"></i> 訪問頻度・時間のカスタマイズ</li>
+                            <li><i class="fas fa-check-circle"></i> 事業所特有の課題に対応</li>
+                            <li><i class="fas fa-check-circle"></i> 専任担当者によるサポート</li>
+                            <li><i class="fas fa-check-circle"></i> 新規事業開発コンサルティング</li>
+                            <li><i class="fas fa-check-circle"></i> 補助金申請サポート</li>
+                        </ul>
+                        <a href="contact.html" class="cta-primary pricing-button">お問い合わせ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA セクション -->
+    <section class="cta-section">
+        <div class="container cta-container">
+            <h2 class="cta-title">AIスキルで広がる可能性、一緒に育てませんか</h2>
+            <p class="cta-description">就労継続支援事業所の新たな可能性を拓くAIスキル習得プログラム。まずはお気軽にご相談ください。</p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="cta-primary">無料相談する</a>
+                <a href="#" class="cta-secondary">資料をダウンロード</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <img src="https://via.placeholder.com/30x30" alt="ロゴ">
+                        AI教育プログラム
+                    </div>
+                    <p>就労継続支援事業所向けのAI活用教育プログラムを提供し、事業所の収益向上と就労者のスキルアップをサポートします。</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>プログラム</h3>
+                    <ul>
+                        <li><a href="program-a.html">プログラムA（業務効率化）</a></li>
+                        <li><a href="program-b.html">プログラムB（AIスキル習得）</a></li>
+                        <li><a href="curriculum.html">カリキュラム詳細</a></li>
+                        <li><a href="effects.html">導入効果</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>導入事例</h3>
+                    <ul>
+                        <li><a href="case-type-a.html">A型事業所事例</a></li>
+                        <li><a href="case-type-b.html">B型事業所事例</a></li>
+                        <li><a href="testimonials.html">お客様の声</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>お問い合わせ</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 〒123-4567 岐阜県岐阜市〇〇町1-1-1</p>
+                    <p><i class="fas fa-phone"></i> 058-XXX-XXXX</p>
+                    <p><i class="fas fa-envelope"></i> info@ai-education.jp</p>
+                    <a href="contact.html" class="cta-button" style="display: inline-block; margin-top: 15px;">お問い合わせ</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 AI活用教育プログラム. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ハンバーガーメニューの開閉
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            hamburger.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+            });
+            
+            // スクロールアニメーション
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                fadeInObserver.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
